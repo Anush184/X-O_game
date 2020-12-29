@@ -6,19 +6,22 @@ def display_table(board: list):
 
 
 def pl1_game_process(player_1: str, curr_tab: list):
-    try:
-        pl1_step = int(input(f"{player_1} your turn: "))
-        if not str(pl1_step).isdigit:
-            raise ValueError(f"{pl1_step} is not a digit.")
-        if pl1_step not in range(0, 9):
-            raise Exception("The number could not be < 0 or > 8")
-    except ValueError as error:
-        print(error)
-        pl1_step = int(input("Give me a digit: "))
-    except Exception as e:
-        print(e)
-        pl1_step = int(input("Give me a number in range(0, 9): "))
+    pl1_step = input(f"{player_1} your turn: ")
+    while not pl1_step.isdigit() or int(pl1_step) not in range(0, 9):
+        try:
+            pl1_step = input("Please enter a number in (0, 8): ")
+            if not pl1_step.isdigit():
+                raise ValueError("You enter not a digit.")
+            if int(pl1_step) not in range(0, 9):
+                raise Exception("You enter a wrong number")
+        except ValueError as error:
+            print(error)
+            pl1_step = input("Please enter a digit: ")
+        except Exception as e:
+            print(e)
+            pl1_step = input("Please enter a right number: ")
 
+    pl1_step = int(pl1_step)
     if curr_tab[pl1_step] == "*":
         curr_tab[pl1_step] = "X"
         display_table(curr_tab)
@@ -28,22 +31,26 @@ def pl1_game_process(player_1: str, curr_tab: list):
 
 
 def pl2_game_process(player_2: str, curr_tab: list):
-    try:
-        pl2_step = int(input(f"{player_2} your turn: "))
-        if not str(pl2_step).isdigit:
-            raise ValueError(f"{pl2_step} is not a digit.")
-        if pl2_step not in range(0, 9):
-            raise Exception("The number could not be < 0 or > 8")
-    except ValueError as error:
-        print(error)
-        pl2_step = int(input("Give me a digit: "))
-    except Exception as e:
-        print(e)
-        pl2_step = int(input("Give me a number in range(0, 9): "))
+    pl2_step = input(f"{player_2} your turn: ")
+    while not pl2_step.isdigit() or int(pl2_step) not in range(0, 9):
+        try:
+            pl2_step = input("Please enter a number in (0, 8): ")
+            if not pl2_step.isdigit():
+                raise ValueError("You enter not a digit.")
+            if int(pl2_step) not in range(0, 9):
+                raise Exception("You enter a wrong number")
+        except ValueError as error:
+            print(error)
+            pl2_step = input("Please enter a digit: ")
+        except Exception as e:
+            print(e)
+            pl2_step = input("Please enter a right number: ")
 
+    pl2_step = int(pl2_step)
     if curr_tab[pl2_step] == "*":
         curr_tab[pl2_step] = "O"
         display_table(curr_tab)
+
     else:
         print("You cant input in this box, please try again! ")
         pl2_game_process(player_2, curr_tab)
